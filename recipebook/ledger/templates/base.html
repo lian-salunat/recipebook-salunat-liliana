@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} | Recipe Book</title>
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Recipe Book</h1>
+        </div>
+        <nav>
+            {% if user.is_authenticated %}
+                <span>Hello, {{ user.username }}</span>
+                <form method="post" action="{% url 'ledger:logout' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'ledger:login' %}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block page_heading %}{% endblock %}
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

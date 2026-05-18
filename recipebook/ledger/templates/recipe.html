@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block page_heading %}<h2>Recipe Detail</h2>{% endblock %}
+
+{% block content %}
+<div id="content">
+    <h3>{{ recipe.name }}</h3>
+
+    {% if recipe.author %}
+        <p>By: {{ recipe.author.name }}</p>
+    {% endif %}
+
+    <h4>Ingredients</h4>
+    <ul>
+        {% for ri in recipe.ingredients.all %}
+            <li>{{ ri.quantity }} {{ ri.ingredient.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h4>Images</h4>
+    {% for img in recipe.images.all %}
+        <img src="{{ img.image.url }}" alt="{{ img.description }}">
+        <p>{{ img.description }}</p>
+    {% empty %}
+        <p>No images yet.</p>
+    {% endfor %}
+
+    <a href="{% url 'ledger:recipe_add_image' recipe.pk %}">Add Image</a>
+</div>
+{% endblock %}
