@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Recipe List{% endblock %}
+
+{% block page_heading %}<h2>Recipes List</h2>{% endblock %}
+
+{% block content %}
+<div id="content">
+    <ul>
+        {% for recipe in recipes %}
+            <li><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

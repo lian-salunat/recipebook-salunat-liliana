@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block page_heading %}<h2>Login</h2>{% endblock %}
+
+{% block content %}
+<div id="content">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p><a href="{% url 'ledger:password_reset' %}">Forgot your password?</a></p>
+</div>
+{% endblock %}
